@@ -37,3 +37,11 @@ function showDivs(n) {
   x[slideIndex-1].style.display = "block";  
 }
 
+var swiper = new Swiper('.swiper-container', {
+  slidesPerView: 1, // Number of slides per view
+  spaceBetween: 10, // Space between each slide
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});

@@ -256,34 +256,35 @@ header {
     }
 }
 
-#heading1 {
-    margin-bottom: -0.5rem;
+#heading1{
+    margin-bottom: 1.5rem;
 }
 
 /****************Section Start******************/
 
 /* ______Silder______ */
 
-#carousel-control-prev ,#carousel-control-next{
+#carousel-control-prev,
+#carousel-control-next {
     width: 40px;
 }
 
-#silder-container{
+#silder-container {
     padding: 0px;
     border: 1px solid #f8f8f8;
     border-radius: 20px;
     background-color: #f3f3f3;
     box-shadow: 0 0 15px -2px #000;
-    
-    
+
+
 }
 
-.carousel-inner{
+.carousel-inner {
     border-radius: 20px;
-    
+
 }
 
-#carousel-img{
+#carousel-img {
     /* border: 1px solid black; */
     border-radius: 20px;
 
@@ -292,9 +293,48 @@ header {
 /* _________Cataogries__________ */
 
 
-.categories-card-img{
-    height: 10rem;
-    /* width: 18rem; */
+.categories-card-img {
     border-radius: 5px;
     box-shadow: 0 0 15px -2px #000;
+}
+
+/* Button */
+
+.bn632-hover {
+    width: 8rem;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 3.5rem;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.bn632-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.bn632-hover:focus {
+    outline: none;
+}
+
+.bn632-hover.bn21 {
+    background-image: linear-gradient(to right,
+            #fc6076,
+            #ff9a44,
+            #ef9d43,
+            #e75516);
+    box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
 }
