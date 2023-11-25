@@ -17,6 +17,7 @@ searchclose.onclick = function () {
     searchbox.classList.remove('active');
 }
 
+
 // Silder 
 
 var slideIndex = 1;
@@ -44,4 +45,15 @@ var swiper = new Swiper('.swiper-container', {
     el: '.swiper-pagination',
     clickable: true,
   },
+});
+
+
+// Search bar
+$(document).ready(function(){
+  $("#Search-box-").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#products").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 });

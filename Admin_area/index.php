@@ -103,6 +103,11 @@
             background-color: #f3f3f3;
             width: 100%;
         }
+        /* body{
+            background-image: url(../images/up-user-details-background.jpg);
+            background-size: contain;
+            object-fit: contain;
+        } */
     </style>
 </head>
 
@@ -132,7 +137,7 @@
                 <div class="col-md-12">
                     <div class="insert-list mt-5">
                         <button class="my-3 border-0 ">
-                            <a href="/" class="bn5 text-decoration-none">Insert Products</a>
+                            <a href="Insert_Products.php" class="bn5 text-decoration-none">Insert Products</a>
                         </button>
                         <button class="my-3 border-0 ">
                             <a href="/" class="bn5 text-decoration-none">View Products</a>
