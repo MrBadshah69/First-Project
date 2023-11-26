@@ -197,6 +197,11 @@ body {
     }
 }
 
+#search_form {
+    display: contents;
+
+}
+
 #Search-btn:hover {
     transform: scale(1.07);
 }
@@ -417,6 +422,3 @@ body {
     background-color: #444444;
     transform: translateY(-50%);
 }
-
-
-
