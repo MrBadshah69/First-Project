@@ -186,10 +186,9 @@ include("Functions/Common_Functions.php");
         <div class="col-md-10">
           <div class="row">
             <?php
-            searchproduct();
             viewproduct();
             viewunqiuecatgories();
-            viewunqiuebrands()
+            viewunqiuebrands();
             ?>
           </div>
         </div>

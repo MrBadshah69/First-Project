@@ -136,13 +136,19 @@
                                         if (strlen($password) < 8) {
                                             array_push($errors, "Password must be at least 8 charactes long");
                                         }
+                                        require_once "database.php";
+                                        $show_data= "SELECT * FROM user where Email='$email'";
+                                        $Result = mysqli_query($conn, $show_data);
+                                        $Rows = mysqli_num_rows($Result);
+                                        if ($Rows>0) {
+                                            array_push($errors, "Email is already Exists");
+                                        }
 
                                         if (count($errors) > 0) {
                                             foreach ($errors as $error) {
                                                 echo "<div class='alert alert-danger'>$error</div>";
                                             }
                                         } else {
-                                            require_once "database.php";
                                             $storesql = "INSERT INTO user (Full_Name, Email,Password) values(?,?,?)";
                                             $stmt = mysqli_stmt_init($conn);
                                             $stmtprepare = mysqli_stmt_prepare($stmt, $storesql);

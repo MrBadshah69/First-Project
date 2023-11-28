@@ -1,3 +1,10 @@
+<?php
+
+include('./database.php');
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,22 +98,51 @@
           <!-- <div class="card border-0 shadow rounded-3 my-5"> -->
           <div class="card-body p-4 p-sm-5">
             <h1 class="mb-5 text-center">Log in</h1>
-            <form>
+            <form action="login.php" method="post">
+              <span><?php
+
+                    if (isset($_POST['Login'])) {
+                      $email = $_POST['Email'];
+                      $password = $_POST['Password'];
+                      $repeatpassword = $_POST['Repeat_Password'];
+
+                      require_once "database.php";
+                      $errors = array();
+
+                      if ($password !== $repeatpassword) {
+                        array_push($errors, "Password does not match try again");
+                      }
+
+                      $sql_select = "SELECT * FROM `user` WHERE Email='$email'";
+                      $Connect_database = mysqli_query($conn, $sql_select);
+                      $row = mysqli_fetch_array($Connect_database, MYSQLI_ASSOC);
+                      if ($row) {
+                        if (password_verify($passwordHash, $row["Password"])) {
+                          header("Location:account.php");
+                          die();
+                        } else {
+                          echo "<div class='alert alert-danger'>password does not match</div>";
+                        }
+                      } else {
+                        echo "<div class='alert alert-danger'>Email does not match</div>";
+                      }
+                    }
+                    ?></span>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input required="required" name="Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input required="required" name="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Repeat Password">
+                <input name="Repeat_Password" type="password" class="form-control" id="floatingPassword" placeholder="Repeat Password">
                 <label for="floatingPassword">Repeat Password</label>
               </div>
               <p><a class="text-decoration-none text-dark" href="login.php"><u>Forget your password</u></a></p>
               <div class="d-flex justify-content-center">
-                <a href="#"><button class="bn632-hover bn21">Log in</button></a>
+                <button type="submit" name="Login" class="bn632-hover bn21">Log in</button>
               </div>
               <p class="text-center">Don't have an account?<a class="text-decoration-none" href="Registration.php">Registration</a></p>
               <div class="line"></div>

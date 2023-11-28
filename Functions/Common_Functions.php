@@ -1,3 +1,10 @@
+<style>
+    .text-decoration-none{
+        color: #212529;
+    }
+</style>
+
+
 <?php
 include('database.php');
 
@@ -17,17 +24,22 @@ function viewproduct()
                 $Product_image1 = $drag_row_data['Product_image1'];
                 $Product_image2 = $drag_row_data['Product_image2'];
                 $Product_image3 = $drag_row_data['Product_image3'];
+                $Product_ID = $drag_row_data['Product_ID'];
                 $Product_title = $drag_row_data['Product_Title'];
+                $Product_Description = $drag_row_data['Product_Description'];
+                $Product_Keywords = $drag_row_data['Product_Keywords'];
                 $Product_Price = $drag_row_data['Product_Price'];
                 $Category_id = $drag_row_data['Category_id'];
                 $Brands_id = $drag_row_data['Brands_id'];
 
                 echo "<div class='p-2 col-lg-3 col-md-6 col-6'>
                 <div class='card border-0'>
+                     <a class='text-decoration-none ' href='Product_details_page.php?Product=$Product_ID'>
                         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
                     <div class='card-body'>
                         <h6 class='card-title'>$Product_title</h6>
                         <span>$Product_Price</span>
+                        </a>
                 </div>
                     </div>
                         </div>";
@@ -54,17 +66,22 @@ function viewunqiuecatgories()
             $Product_image1 = $drag_row_data['Product_image1'];
             $Product_image2 = $drag_row_data['Product_image2'];
             $Product_image3 = $drag_row_data['Product_image3'];
+            $Product_ID = $drag_row_data['Product_ID'];
             $Product_title = $drag_row_data['Product_Title'];
+            $Product_Description = $drag_row_data['Product_Description'];
+            $Product_Keywords = $drag_row_data['Product_Keywords'];
             $Product_Price = $drag_row_data['Product_Price'];
             $Category_id = $drag_row_data['Category_id'];
             $Brands_id = $drag_row_data['Brands_id'];
 
             echo "<div class='p-2 col-lg-3 col-md-6 col-6'>
                 <div class='card border-0'>
+                <a class='text-decoration-none ' href='Product_details_page.php?Product=$Product_ID'>
                         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
                     <div class='card-body'>
                         <h6 class='card-title'>$Product_title</h6>
                         <span>$Product_Price</span>
+                        </a>
                 </div>
                     </div>
                         </div>";
@@ -106,16 +123,20 @@ function viewunqiuebrands()
             $Product_image1 = $drag_row_data['Product_image1'];
             $Product_image2 = $drag_row_data['Product_image2'];
             $Product_image3 = $drag_row_data['Product_image3'];
+            $Product_Description = $drag_row_data['Product_Description'];
+            $Product_Keywords = $drag_row_data['Product_Keywords'];
             $Product_title = $drag_row_data['Product_Title'];
+            $Product_ID = $drag_row_data['Product_ID'];
             $Product_Price = $drag_row_data['Product_Price'];
             $Brands_id = $drag_row_data['Brands_id'];
 
             echo "<div class='p-2 col-lg-3 col-md-6 col-6'>
-                <div class='card border-0'>
+                <div class='card border-0'>                     <a class='text-decoration-none 'href='Product_details_page.php?Product=$Product_ID'>
                         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
                     <div class='card-body'>
                         <h6 class='card-title'>$Product_title</h6>
                         <span>$Product_Price</span>
+                        </a>
                 </div>
                     </div>
                         </div>";
@@ -148,29 +169,34 @@ function searchproduct()
 
     if (isset($_GET['Search_click'])) {
         $search_box_vlaue = $_GET['Search_product_box'];
-        
+
         $Search_product = "SELECT * from `products` where Product_Keywords like'%$search_box_vlaue%'";
-    $connect_data = mysqli_query($conn, $Search_product);
-    while ($drag_row_data = mysqli_fetch_assoc($connect_data)) {
-        
-        $Product_image1 = $drag_row_data['Product_image1'];
-        $Product_image2 = $drag_row_data['Product_image2'];
-        $Product_image3 = $drag_row_data['Product_image3'];
-        $Product_title = $drag_row_data['Product_Title'];
-        $Product_Price = $drag_row_data['Product_Price'];
-        $Category_id = $drag_row_data['Category_id'];
-        $Brands_id = $drag_row_data['Brands_id'];
-        $Product_Keywords=$drag_row_data['Product_Keywords'];
-        
-        echo "<div class='p-2 col-lg-3 col-md-6 col-6'>
+        $connect_data = mysqli_query($conn, $Search_product);
+        while ($drag_row_data = mysqli_fetch_assoc($connect_data)) {
+
+            $Product_image1 = $drag_row_data['Product_image1'];
+            $Product_image2 = $drag_row_data['Product_image2'];
+            $Product_image3 = $drag_row_data['Product_image3'];
+            $Product_title = $drag_row_data['Product_Title'];
+            $Product_ID = $drag_row_data['Product_ID'];
+            $Product_Price = $drag_row_data['Product_Price'];
+            $Category_id = $drag_row_data['Category_id'];
+            $Brands_id = $drag_row_data['Brands_id'];
+            $Product_Description = $drag_row_data['Product_Description'];
+            $Product_Keywords = $drag_row_data['Product_Keywords'];
+
+            echo "<div class='p-2 col-lg-3 col-md-6 col-6'>
         <div class='card border-0'>
+        <a class='text-decoration-none ' href='Product_details_page.php?Product=$Product_ID'>
         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
         <div class='card-body'>
         <h6 class='card-title'>$Product_title</h6>
         <span>$Product_Price</span>
+        </a>
         </div>
         </div>
         </div>";
+        }
     }
 }
-}
+?>

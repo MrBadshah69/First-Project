@@ -1,59 +1,78 @@
-// Search Box 
+// Search Box
 
-let searchbtn = document.querySelector('#Search-btn');
-let searchclose = document.querySelector('#Search-close');
-let searchbox = document.querySelector('.Search-box');
-let sectionfirst = document.querySelector('#section-first')
+let searchbtn = document.querySelector("#Search-btn");
+let searchclose = document.querySelector("#Search-close");
+let searchbox = document.querySelector(".Search-box");
+let sectionfirst = document.querySelector("#section-first");
 
 searchbtn.onclick = function () {
-
-    searchbox.classList.add('active');
-    sectionfirst.classList.add('active');
-
-}
+  searchbox.classList.add("active");
+  sectionfirst.classList.add("active");
+};
 searchclose.onclick = function () {
+  sectionfirst.classList.remove("active");
+  searchbox.classList.remove("active");
+};
 
-    sectionfirst.classList.remove('active');
-    searchbox.classList.remove('active');
-}
-
-
-// Silder 
+// Silder
 
 var slideIndex = 1;
 showDivs(slideIndex);
 
 function plusDivs(n) {
-  showDivs(slideIndex += n);
+  showDivs((slideIndex += n));
 }
 
 function showDivs(n) {
   var i;
   var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
+  if (n > x.length) {
+    slideIndex = 1;
   }
-  x[slideIndex-1].style.display = "block";  
+  if (n < 1) {
+    slideIndex = x.length;
+  }
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex - 1].style.display = "block";
 }
 
-var swiper = new Swiper('.swiper-container', {
+var swiper = new Swiper(".swiper-container", {
   slidesPerView: 1, // Number of slides per view
   spaceBetween: 10, // Space between each slide
   pagination: {
-    el: '.swiper-pagination',
+    el: ".swiper-pagination",
     clickable: true,
   },
 });
 
-
 // Search bar
-$(document).ready(function(){
-  $("#Search-box-").on("keyup", function() {
+$(document).ready(function () {
+  $("#Search-box-").on("keyup", function () {
     var value = $(this).val().toLowerCase();
-    $("#products").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $("#products").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
+  });
+});
+
+// Add to cart
+
+$(document).ready(function () {
+  $("#addtocart").on("click", function () {
+    var button = $(this);
+    var cart = $("#cart");
+    var cartTotal = cart.attr("data-totalitems");
+    var newCartTotal = parseInt(cartTotal) + 1;
+
+    button.addClass("sendtocart");
+    setTimeout(function () {
+      button.removeClass("sendtocart");
+      cart.addClass("shake").attr("data-totalitems", newCartTotal);
+      setTimeout(function () {
+        cart.removeClass("shake");
+      }, 500);
+    }, 1000);
   });
 });
