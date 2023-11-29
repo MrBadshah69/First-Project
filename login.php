@@ -2,7 +2,10 @@
 
 include('./database.php');
 
-
+session_start();
+if (isset($_SESSION["User"])) {
+  header("location: account.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -80,12 +83,75 @@ include('./database.php');
       background-color: #F3F3F3;
       height: 32px;
     }
+
+    /********* Footer ************/
+
+    .footer {
+      background-color: #F3F3F3;
+
+    }
+
+    #email-for-footer-Subscribe {
+      outline: #000;
+      background-color: #f3f3f3;
+      border: 0;
+      width: 95%;
+    }
+
+    .email-Subscribe {
+      display: flex;
+      border: 1px solid #000;
+      width: 30%;
+      align-items: center;
+    }
+
+    .arrow-for-Subscribe {
+      padding: 5px;
+      width: 30px;
+      height: 30px;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .rating {
+      background-color: #fff;
+    }
+
+    @media (min-width: 375px) {
+      .email-Subscribe {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 375px) {
+      #email-for-footer-Subscribe {
+        width: 95%;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      .email-Subscribe {
+        width: 50%;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      #email-for-footer-Subscribe {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 
 <body>
   <!-- Header -->
   <?php
+  ob_start();
   include('./Header.php');
   ?>
 
@@ -95,45 +161,53 @@ include('./database.php');
     <div class="container">
       <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-          <!-- <div class="card border-0 shadow rounded-3 my-5"> -->
           <div class="card-body p-4 p-sm-5">
             <h1 class="mb-5 text-center">Log in</h1>
+            <span>
+              <?php
+              if (isset($_POST['Login'])) {
+                $email = $_POST['Email'];
+                $password = $_POST['Password'];
+                $repeatpassword = $_POST['Repeat_Password'];
+
+                $errors = array();
+
+                if ($password !== $repeatpassword) {
+                  array_push($errors, "Repeat Password does not match. Please try again.");
+                }
+
+
+
+                $sql_select = "SELECT * FROM user WHERE Email='$email'";
+                $Result = mysqli_query($conn, $sql_select);
+                $row = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+
+
+                if ($row) {
+                  $verify_pass = password_verify($password, $row["Password"]);
+                  if ($verify_pass) {
+                    header("location: account.php");
+                    session_start();
+                    $_SESSION["User"] = "yes";
+                    ob_end_flush();
+                    die();
+                  } else {
+                    echo "<div class='alert alert-danger'>Password does not match. Please try again.</div>";
+                  }
+                } else {
+                  echo "<div class='alert alert-danger'>Email does not match.</div>";
+                }
+              }
+
+              ?>
+            </span>
             <form action="login.php" method="post">
-              <span><?php
-
-                    if (isset($_POST['Login'])) {
-                      $email = $_POST['Email'];
-                      $password = $_POST['Password'];
-                      $repeatpassword = $_POST['Repeat_Password'];
-
-                      require_once "database.php";
-                      $errors = array();
-
-                      if ($password !== $repeatpassword) {
-                        array_push($errors, "Password does not match try again");
-                      }
-
-                      $sql_select = "SELECT * FROM `user` WHERE Email='$email'";
-                      $Connect_database = mysqli_query($conn, $sql_select);
-                      $row = mysqli_fetch_array($Connect_database, MYSQLI_ASSOC);
-                      if ($row) {
-                        if (password_verify($passwordHash, $row["Password"])) {
-                          header("Location:account.php");
-                          die();
-                        } else {
-                          echo "<div class='alert alert-danger'>password does not match</div>";
-                        }
-                      } else {
-                        echo "<div class='alert alert-danger'>Email does not match</div>";
-                      }
-                    }
-                    ?></span>
               <div class="form-floating mb-3">
-                <input required="required" name="Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input name="Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating mb-3">
-                <input required="required" name="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input name="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
               </div>
               <div class="form-floating mb-3">
@@ -142,7 +216,7 @@ include('./database.php');
               </div>
               <p><a class="text-decoration-none text-dark" href="login.php"><u>Forget your password</u></a></p>
               <div class="d-flex justify-content-center">
-                <button type="submit" name="Login" class="bn632-hover bn21">Log in</button>
+                <button type="submit" name="Login" value="Login" class="bn632-hover bn21">Log in</button>
               </div>
               <p class="text-center">Don't have an account?<a class="text-decoration-none" href="Registration.php">Registration</a></p>
               <div class="line"></div>

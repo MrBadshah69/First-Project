@@ -1,5 +1,5 @@
 <style>
-    .text-decoration-none{
+    .text-decoration-none {
         color: #212529;
     }
 </style>
@@ -199,4 +199,52 @@ function searchproduct()
         }
     }
 }
+
+// Function to get the client IP address
+function get_client_ip()
+{
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if (getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if (getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if (getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if (getenv('HTTP_FORWARDED'))
+        $ipaddress = getenv('HTTP_FORWARDED');
+    else if (getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+
+
+// ADD TO CART FUNCTION
+
+function Cart(){
+
+    if (isset($_GET['add_to_cart'])) {
+        global  $conn;
+    
+        $ipaddress= get_client_ip();
+        $product_id =$_GET['add_to_cart'];
+
+        $Select_query = "SELECT * FROM  `cart_detail` where ip_address='$ipaddress' and Product_ID='$product_id'";
+        $result = mysqli_query($conn , $Select_query);
+        $count_row_num = mysqli_num_rows($result);
+        if ($count_row_num>0) {
+            echo "<div class='alert alert-dark'>added to cart successfully!!! <a class='d-flex justify-content-center text-decoration-none text-danger' href='addtocart.php'>Go to Cart</a></div>";
+        }else {
+            $insert_given_data = "INSERT INTO `cart_detail` (ip_address	, Product_ID, Quantity) VALUES ('$ipaddress', '$product_id' , 0)";
+            $result = mysqli_query($conn , $insert_given_data);
+            echo "<srcipt>window.open('Product_details_page.php'.'_self')</srcipt>";
+        }
+        
+    }
+}
+
+
 ?>
