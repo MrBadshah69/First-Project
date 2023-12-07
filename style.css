@@ -1,22 +1,39 @@
-/******Body Part******/
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
     margin: 0;
-    padding: 0;
-    font-family: "Open Sans", sans-serif;
+    padding:0 ;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
 
 #nav-item-link {
     color: rgb(18, 18, 18);
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.9rem;
 }
 
-#nav-item-link:hover {
-    text-decoration: underline;
+#nav-item-link:before {
+
+    content: " ";
+    display: inline-block;
+    position: relative;
+    bottom: -22px;
+    width: 100%;
+    height: 2px;
+    background-color: #2BD156;
+    transform: scaleX(0);
+    transition: transform 0.2s linear;
+
+}
+
+#nav-item-link:hover::before {
+    transform: scaleX(1);
 
 }
 
@@ -27,7 +44,7 @@ body {
 #nav-item-link-menu {
     font-weight: bold;
     color: rgb(18, 18, 18);
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .hero {
@@ -287,7 +304,7 @@ body {
     border: 1px solid #f8f8f8;
     border-radius: 20px;
     background-color: #f3f3f3;
-    box-shadow: 0 4px 15px 0 #000;
+    /* box-shadow: 0 4px 15px 0 #000; */
 
 
 }
@@ -308,7 +325,20 @@ body {
 
 .categories-card-img {
     border-radius: 5px;
-    box-shadow: 0 4px 15px 0 #000;
+
+    /* box-shadow: 0 4px 15px 0 #000; */
+}
+
+.categories-card,
+#view_all_button,
+#Product_card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.categories-card:hover,
+#view_all_button:hover,
+#Product_card:hover {
+    transform: scale(1.07);
 }
 
 /* Button */

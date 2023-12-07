@@ -87,13 +87,13 @@ if (isset($_SESSION["User"])) {
     /********* Footer ************/
 
     .footer {
-      background-color: #F3F3F3;
+      background-color: #F8F9FA;
 
     }
 
     #email-for-footer-Subscribe {
       outline: #000;
-      background-color: #f3f3f3;
+      background-color: #F8F9FA;
       border: 0;
       width: 95%;
     }
@@ -144,6 +144,14 @@ if (isset($_SESSION["User"])) {
       #email-for-footer-Subscribe {
         width: 90%;
       }
+    }
+
+    .navbar-collapse {
+      margin-top: -22px;
+    }
+
+    #nav-item-link:before {
+      bottom: -28px;
     }
   </style>
 </head>

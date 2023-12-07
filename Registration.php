@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["User"])) {
-  header("location: account.php");
+    header("location: account.php");
 }
 ?>
 <!DOCTYPE html>
@@ -91,6 +91,76 @@ if (isset($_SESSION["User"])) {
             background-color: #F3F3F3;
             height: 32px;
         }
+
+        /********* Footer ************/
+
+        .footer {
+            background-color: #F8F9FA;
+
+        }
+
+        #email-for-footer-Subscribe {
+            outline: #000;
+            background-color: #F8F9FA;
+            border: 0;
+            width: 95%;
+        }
+
+        .email-Subscribe {
+            display: flex;
+            border: 1px solid #000;
+            width: 30%;
+            align-items: center;
+        }
+
+        .arrow-for-Subscribe {
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .rating {
+            background-color: #fff;
+        }
+
+        @media (min-width: 375px) {
+            .email-Subscribe {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 375px) {
+            #email-for-footer-Subscribe {
+                width: 95%;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .email-Subscribe {
+                width: 50%;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            #email-for-footer-Subscribe {
+                width: 90%;
+            }
+        }
+
+        .navbar-collapse {
+            margin-top: -22px;
+        }
+
+        #nav-item-link:before {
+            bottom: -28px;
+        }
     </style>
 </head>
 
@@ -143,10 +213,10 @@ if (isset($_SESSION["User"])) {
                                             array_push($errors, "Password must be at least 8 charactes long");
                                         }
                                         require_once "database.php";
-                                        $show_data= "SELECT * FROM user where Email='$email'";
+                                        $show_data = "SELECT * FROM user where Email='$email'";
                                         $Result = mysqli_query($conn, $show_data);
                                         $Rows = mysqli_num_rows($Result);
-                                        if ($Rows>0) {
+                                        if ($Rows > 0) {
                                             array_push($errors, "Email is already Exists");
                                         }
 

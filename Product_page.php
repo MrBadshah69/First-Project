@@ -32,6 +32,7 @@ include("Functions/Common_Functions.php");
       }
 
     });
+
   </script>
   <!-- Bootstrap Js -->
   <script src="Assets/Bootstrap/Js/bootstrap.bundle.min.js"></script>
@@ -58,13 +59,13 @@ include("Functions/Common_Functions.php");
     /********* Footer ************/
 
     .footer {
-      background-color: #F3F3F3;
+      background-color: #F8F9FA;
 
     }
 
     #email-for-footer-Subscribe {
       outline: #000;
-      background-color: #f3f3f3;
+      background-color: #F8F9FA;
       border: 0;
       width: 95%;
     }
@@ -127,18 +128,27 @@ include("Functions/Common_Functions.php");
     #search_form {
       display: contents;
     }
-    .Search_click{
-      background-color: #F3F3F3;
-      height:32px ;
+
+    .Search_click {
+      background-color: #F8F9FA;
+      height: 32px;
+    }
+
+    /* Title Limit */
+    .card-title {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
     }
   </style>
 </head>
 
 <body>
 
-    <?php
-      include('./Header.php');
-    ?>
+  <?php
+  include('./Header.php');
+  ?>
 
 
 
@@ -176,8 +186,15 @@ include("Functions/Common_Functions.php");
               ?>
             </ul>
           </div>
+          <hr>
+          <a class="nav-link d-flex align-content-center" data-toggle="collapse" href="#Pirce-range">
+            <h6 class="d-inline-block" style="width: 95%;">Pirce range
+            </h6>
+            <ion-icon class="mt-1 d-flex" name="add-circle-outline"></ion-icon>
+          </a>
+          <div id="Pirce-range" class="collapse">
 
-
+          </div>
 
 
 
@@ -207,9 +224,9 @@ include("Functions/Common_Functions.php");
 
 
 
-    <?php
-    include('./footer.php')
-    ?>
+  <?php
+  include('./footer.php')
+  ?>
 
 </body>
 
