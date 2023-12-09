@@ -466,6 +466,8 @@ if (isset($_GET['Product'])) {
                     position: relative;
                     right: 30px;
                 }
+
+                
             </style>
         </head>
 
@@ -567,10 +569,15 @@ if (isset($_GET['Product'])) {
                         Give me Rating
                     </h3>
                 </div>
-
+                <?php
+                if (isset($_POST['Submit'])) {
+                        $select_stars= $_POST['stars'];
+                        
+                }
+                ?>
 
                 <form action="" method="post">
-                    <select name="" class="star" id="stars">
+                    <select name="stars" class="star" id="stars">
                         <option value="">--</option>
                         <option value="1" required selected>1</option>
                         <option value="2" required>2</option>

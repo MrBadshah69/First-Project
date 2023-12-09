@@ -126,7 +126,7 @@
 <script>
   //  Add to cart
   $(document).ready(function() {
-    $("#addtocart ,#addtocart2 ,#addtocart3 ,#addtocart4").on("click", function() {
+    $("#addtocart").on("click", function() {
       var button = $(this);
       var cart = $("#cart");
       var cartTotal = cart.attr("data-totalitems");
