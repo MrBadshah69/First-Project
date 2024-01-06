@@ -6,6 +6,7 @@ if (isset($_POST['Insert_product'])) {
 
     $Product_Title = $_POST['Product_title'];
     $Product_Description = $_POST['Product_Description'];
+    $Product_long_Description = $_POST['Product_long_Description'];
     $Product_Keywords = $_POST['Product_Keywords'];
     $Product_Category = $_POST['Product_Category'];
     $Product_Brands = $_POST['Product_Brands'];
@@ -23,7 +24,7 @@ if (isset($_POST['Insert_product'])) {
     $tmp_Product_image3 = $_FILES['Product_image3']['tmp_name'];
 
     // If Use For Emtpy Not Aeccpt
-    if ($Product_Title == "" or $Product_Description == "" or $Product_Keywords == "" or $Product_Category == "" or $Product_Brands == "" or $Product_Price == "" or $Product_image1 == "" or $Product_image2 == "" or $Product_image3 == "") {
+    if ($Product_Title == "" or $Product_Description == "" or $Product_long_Description == "" or $Product_Keywords == "" or $Product_Category == "" or $Product_Brands == "" or $Product_Price == "" or $Product_image1 == "" or $Product_image2 == "" or $Product_image3 == "") {
         echo "<script>alert('All Feild Are Req')</script>";
         exit();
     } else {
@@ -33,7 +34,7 @@ if (isset($_POST['Insert_product'])) {
         move_uploaded_file($tmp_Product_image3, "./Products_image/$Product_image3");
 
         // Insert Query
-        $move_product_detail  = "insert into `products` (Product_Title,Product_Description,Product_Keywords,Category_id,Brands_id,Product_Price,Product_image1,Product_image2,Product_image3,Product_Status) value('$Product_Title','$Product_Description','$Product_Keywords','$Product_Category','$Product_Brands','$Product_Price','$Product_image1','$Product_image2','$Product_image3', '$Product_Status')";
+        $move_product_detail  = "insert into `products` (Product_Title,Product_Description,Product_long_Description,Product_Keywords,Category_id,Brands_id,Product_Price,Product_image1,Product_image2,Product_image3,Product_Status) value('$Product_Title','$Product_Description','$Product_long_Description','$Product_Keywords','$Product_Category','$Product_Brands','$Product_Price','$Product_image1','$Product_image2','$Product_image3', '$Product_Status')";
         $connect_database = mysqli_query($conn, $move_product_detail);
         if ($connect_database) {
             echo "<script>alert('Updated successfully')</script>";
@@ -195,6 +196,11 @@ if (isset($_POST['Insert_product'])) {
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="Product_Description" class="form-label">Product Description</label>
                 <input type="text" name="Product_Description" id="Product_Description" class="form-control" placeholder="Enter Product Description" autocomplete="off" required="required">
+            </div>
+            <!-- Product_long_Description -->
+            <div class="form-outline mb-4 w-50 m-auto">
+                <label for="Product_long_Description" class="form-label">Product Long Description</label>
+                <input type="text" name="Product_long_Description" id="Product_long_Description" class="form-control" placeholder="Enter Product Long Description" autocomplete="off" required="required">
             </div>
             <!-- Product_Keywords -->
             <div class="form-outline mb-4 w-50 m-auto">

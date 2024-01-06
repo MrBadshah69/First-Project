@@ -106,45 +106,6 @@
       height: 32px;
     }
 
-
-    @media only screen and (max-width: 600px) {
-      #addtocart {
-        padding: 10px;
-        border: none;
-        background: lighten(#292d48, 65);
-        position: relative;
-        outline: none;
-        width: 100%;
-        border-radius: 5px;
-        color: #292d48;
-        font-size: 18px;
-      }
-
-      .cart-item {
-        position: absolute;
-        height: 24px;
-        width: 22px;
-        top: -10px;
-        right: -10px;
-
-        &:before {
-          content: '1';
-          display: block;
-          line-height: 24px;
-          height: 24px;
-          width: 24px;
-          font-size: 12px;
-          font-weight: 600;
-          background: #2bd156;
-          color: white;
-          border-radius: 20px;
-          text-align: center;
-        }
-      }
-
-    }
-
-
     .navbar-collapse {
       margin-top: -22px;
 
@@ -186,6 +147,7 @@
 
   <!-- Header -->
   <?php
+  include('./Functions/Common_Functions.php');
   include('./Header.php');
   ?>
 

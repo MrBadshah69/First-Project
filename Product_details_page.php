@@ -311,6 +311,22 @@
             position: relative;
             right: 30px;
         }
+
+        ul.fontstar {
+            font-size: 30px;
+            position: relative;
+            right: 30px;
+            display: -webkit-inline-box;
+        }
+
+        .nav-link-home-link {
+            text-decoration: none;
+            color: #06B153;
+        }
+
+        .nav-link-home-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -326,13 +342,222 @@
 
     <?php
 
-    include('Header.php');
+include('./Functions/Common_Functions.php');
+include('Header.php');
 
     ?>
 
 
-    <div class="container py-3 me-1">
-        <a class="text-dark p-2 text-decoration-none" href="./index.php"><ion-icon class="home_icon" name="home-outline"></ion-icon> Home</a><b>/</b><a class="text-dark p-2 text-decoration-none" href="./Category.php"><ion-icon class="category_icon" name="list-outline"></ion-icon> Category</a><b>/</b><a class="text-dark p-2 text-decoration-none" href="#"><i class="fa-brands fa-product-hunt"></i> Product</a>
+    <!-- <div class="container py-3 me-1">
+        <a class="text-dark p-2 text-decoration-none" href="./index.php"><ion-icon class="home_icon"
+                name="home-outline"></ion-icon> Home</a><b>/</b><a class="text-dark p-2 text-decoration-none"
+            href="./Category.php"><ion-icon class="category_icon" name="list-outline"></ion-icon> Category</a><b>/</b><a
+            class="text-dark p-2 text-decoration-none" href="#"><i class="fa-brands fa-product-hunt"></i> Product</a>
+    </div> -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+        <div class="container d-flex justify-content-center">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="nav-link-home-link" href="index.php">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Product</li>
+                </ol>
+            </nav>
+        </div>
+    </nav>
+
+
+    <?php
+    include('database.php');
+
+
+
+
+
+
+    // For Product
+
+    if (isset($_GET['Product'])) {
+        $product = $_GET['Product'];
+
+        // Fetch product details from the database
+        $sql = "SELECT * FROM `products` WHERE Product_ID = $product";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            $Product_image1 = $row['Product_image1'];
+            $Product_image2 = $row['Product_image2'];
+            $Product_image3 = $row['Product_image3'];
+            $Product_ID = $row['Product_ID'];
+            $Product_title = $row['Product_Title'];
+            $Product_Description = $row['Product_Description'];
+            $Product_Keywords = $row['Product_Keywords'];
+            $Product_Price = $row['Product_Price'];
+
+
+    ?>
+
+
+            <div class="container mt-5">
+
+                <div class="row">
+
+                    <div class='col-lg-6 col-md-6 col-12'>
+                        <div class='card border-0'>
+                            <div id="carouselExample" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="<?php echo " ./Admin_area/Products_image/$Product_image1 "; ?>" class=" d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="<?php echo " ./Admin_area/Products_image/$Product_image2 "; ?>" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="<?php echo " ./Admin_area/Products_image/$Product_image3 "; ?>" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class='card-body'>
+                            <div class="rating d-flex">
+                                <ul class="list-unstyled d-flex text-warning mb-0 me-2">
+                                    <li><i class="fas fa-star fa-sm"></i></li>
+                                    <li><i class="far fa-star fa-sm"></i></li>
+                                    <li><i class="far fa-star fa-sm"></i></li>
+                                    <li><i class="far fa-star fa-sm"></i></li>
+                                    <li><i class="far fa-star fa-sm"></i></li>
+                                </ul>
+                                <?php
+                                $show_query = "SELECT COUNT(Product_ID) AS total_review FROM `rating_review` WHERE Product_ID='$product'";
+                                $con_query = mysqli_query($conn, $show_query);
+                                $row_check = mysqli_fetch_assoc($con_query);
+                                $total_review = $row_check['total_review'];
+
+                                echo "<h5>" . $total_review . " Reviews</h5>";
+                                ?>
+                            </div>
+                            <h3 class='card-title mt-3'>
+                                <?php echo $Product_title; ?>
+                            </h3>
+                            <br>
+                            <p class="card-description">
+                                <?php echo $Product_Description; ?>
+                            </p>
+                            <br>
+                            <h4>
+                                <?php echo $Product_Price; ?>
+                            </h4>
+                        </div>
+
+                        <?php
+
+                        echo "<div class='card-body mt-2'>
+                    <div class='page-wrapper'>
+                    <a href='Product_details_page.php?Product=$Product_ID&addtocart=$Product_ID'><button id='addtocart'><i class='fa-solid fa-cart-shopping'></i>
+                          Add to Cart
+            <span class='cart-item'></span>
+          </button></a>";
+                        Cart();
+                        ?>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+    <?php
+        } else {
+            echo "Product not found!" . $conn->error;;
+        }
+    } else {
+        echo "Invalid request!";
+    }
+    ?>
+
+    <hr>
+
+
+
+
+    <div class="container">
+
+
+        <form class="mt-5" action="<?php echo " Product_details_page.php?Product=$Product_ID"; ?>" method="post">
+
+            <div class="mt-5 d-inline">
+                <h3 class="d-inline">
+                    Give me Rating
+                </h3>
+            </div>
+
+            <input type="hidden" name="Product_ID" value="<?php echo $Product_ID; ?>">
+            <select name="stars" class="star" id="stars">
+                <option value="">--</option>
+                <option value="1" required selected>1</option>
+                <option value="2" required>2</option>
+                <option value="3" required>3</option>
+                <option value="4" required>4</option>
+                <option value="5" required>5</option>
+            </select>
+
+
+            <div id="review_user_name" class="form-floating mt-3">
+                <input required name="user_name" type="text" class="form-control review_input" id="floatingInput" placeholder="Full Name">
+                <label class="label-user" for="floatingInput">Full Name</label>
+            </div>
+            <div id="review_user_comment" class="form-floating mt-3">
+                <textarea required name="user_comment" class="form-control review_input" id="Comment" id="floatingInput" rows="15" placeholder="Comment"></textarea>
+                <label for="floatingInput">Comment</label>
+            </div>
+
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                if (isset($_POST['Submit'])) {
+
+                    $select_stars = $_POST['stars'];
+                    $user_name = $_POST['user_name'];
+                    $user_comments = $_POST['user_comment'];
+                    $Product_ID = $_POST['Product_ID'];
+
+                    $insert_sql = "INSERT INTO `rating_review`(`user_give_star`, `Product_ID`, `user_name`, `user_comments`) VALUES ('$select_stars','$Product_ID','$user_name','$user_comments')";
+
+                    $star_insert = mysqli_query($conn, $insert_sql);
+
+                    if ($star_insert) {
+                        echo "<div class='alert alert-success mt-5 alert-dismissible fade show' role='alert'>
+                Your rating is successfully submit
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+              </div>";
+                    } else {
+                        echo "rating not submit";
+                    }
+                }
+            }
+
+            ?>
+            <button type="submit" name="Submit" class="button-59 mt-3">Submit</button>
+
+        </form>
+
+    </div>
+
+
+    <div class="mt-5">
+        <?php
+
+        include('./footer.php')
+        ?>
     </div>
 
     <script>
@@ -348,35 +573,6 @@
             let button = this;
             button.classList.add('clicked');
         }
-
-
-        // quantity
-
-        function incrementQuantity() {
-            var quantityInput = document.getElementById('quantity');
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-        }
-
-        function decrementQuantity() {
-            var quantityInput = document.getElementById('quantity');
-            if (parseInt(quantityInput.value) > 1) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
-            }
-        }
-
-        // minus And Plus
-        $(document).ready(function() {
-            $('.count').prop('disabled', true);
-            $(document).on('click', '.plus', function() {
-                $('.count').val(parseInt($('.count').val()) + 1);
-            });
-            $(document).on('click', '.minus', function() {
-                $('.count').val(parseInt($('.count').val()) - 1);
-                if ($('.count').val() == 0) {
-                    $('.count').val(1);
-                }
-            });
-        });
 
 
         // Search Box 
@@ -419,270 +615,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script src="jquery.fontstar.js"></script>
-</body>
-
-</html>
-
-<?php
-include("database.php");
-include("Functions/Common_Functions.php");
-
-
-
-
-
-
-// For Product
-
-if (isset($_GET['Product'])) {
-    $product = $_GET['Product'];
-
-    // Fetch product details from the database
-    $sql = "SELECT * FROM `products` WHERE Product_ID = $product";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-
-        $Product_image1 = $row['Product_image1'];
-        $Product_image2 = $row['Product_image2'];
-        $Product_image3 = $row['Product_image3'];
-        $Product_ID = $row['Product_ID'];
-        $Product_title = $row['Product_Title'];
-        $Product_Description = $row['Product_Description'];
-        $Product_Keywords = $row['Product_Keywords'];
-        $Product_Price = $row['Product_Price'];
-        // for Reting & review
-
-
-
-
-?>
-
-        <html>
-
-        <head>
-            <style>
-                @media only screen and (max-width: 600px) {
-                    #addtocart {
-                        padding: 10px;
-                        border: none;
-                        background: lighten(#292d48, 65);
-                        position: relative;
-                        outline: none;
-                        width: 100%;
-                        border-radius: 5px;
-                        color: #292d48;
-                        font-size: 18px;
-                    }
-
-                    .cart-item {
-                        position: absolute;
-                        height: 24px;
-                        width: 22px;
-                        top: -10px;
-                        right: -10px;
-
-                        &:before {
-                            content: '1';
-                            display: block;
-                            line-height: 24px;
-                            height: 24px;
-                            width: 24px;
-                            font-size: 12px;
-                            font-weight: 600;
-                            background: #2bd156;
-                            color: white;
-                            border-radius: 20px;
-                            text-align: center;
-                        }
-                    }
-
-                }
-            </style>
-        </head>
-
-        <body>
-
-
-            <div class="container mt-5">
-
-                <div class="row">
-
-                    <div class='col-lg-6 col-md-6 col-12'>
-                        <div class='card border-0'>
-                            <div id="carouselExample" class="carousel slide">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="<?php echo "./Admin_area/Products_image/$Product_image1 "; ?>" class=" d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="<?php echo "./Admin_area/Products_image/$Product_image2 "; ?>" class="d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="<?php echo "./Admin_area/Products_image/$Product_image3 "; ?>" class="d-block w-100" alt="...">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class='card-body'>
-                            <h3 class='card-title mt-3'><?php echo $Product_title; ?></h3>
-                            <br>
-                            <p class="card-description"><?php echo $Product_Description; ?></p>
-                            <br>
-                            <div class="rating d-flex">
-                                <b style="padding-right: 20px;">Review</b>
-                                <ul class="list-unstyled d-flex text-warning mb-0">
-                                    <li><i class="far fa-star fa-sm"></i></li>
-                                    <li><i class="far fa-star fa-sm"></i></li>
-                                    <li><i class="far fa-star fa-sm"></i></li>
-                                    <li><i class="far fa-star fa-sm"></i></li>
-                                    <li><i class="far fa-star fa-sm"></i></li>
-                                </ul>
-                            </div>
-                            <br>
-                            <h4><?php echo $Product_Price; ?></h4>
-
-                            <div class="quantity-container">
-                                <p class="quantity-p">Quantity</p>
-                                <button class="plus_mins" onclick="decrementQuantity()">-</button>
-                                <input type="text" id="quantity" value="1" max="3" min="1" readonly>
-                                <button class="plus_mins" onclick="incrementQuantity()">+</button>
-                            </div>
-                            <div class="card-body mt-2">
-                                <div class="page-wrapper">
-                                    <button id="addtocart">
-                                        Add to Cart
-                                        <span class="cart-item"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <?php
-                            Cart()
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <hr>
-
-
-
-
-
-        </body>
-
-        </html>
-<?php
-    } else {
-        echo "Product not found!";
-    }
-} else {
-    echo "Invalid request!";
-}
-?>
-<html>
-
-<head>
-    <style>
-        ul.fontstar {
-            font-size: 30px;
-            position: relative;
-            right: 30px;
-            display: -webkit-inline-box;
-        }
-    </style>
-</head>
-
-<body>
-
-
-
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        if (isset($_POST['Submit'])) {
-
-            $select_stars = $_POST['stars'];
-            $user_name = $_POST['user_name'];
-            $user_comments = $_POST['user_comment'];
-            $Product_ID = $_POST['Product_ID'];
-
-            $insert_sql = "INSERT INTO `rating_review`(`user_give_star`, `Product_ID`, `user_name`, `user_comments`) VALUES ('$select_stars','$Product_ID','$user_name','$user_comments')";
-
-            $star_insert = mysqli_query($conn, $insert_sql);
-
-            if ($star_insert) {
-                echo "<div class='alert alert-success mt-5 alert-dismissible fade show' role='alert'>
-                Your rating is successfully submit
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-              </div>";
-            } else {
-                echo "rating not submit";
-            }
-        }
-    }
-
-    ?>
-    <form class="mt-5" action="" method="post">
-
-        <div class="mt-5 d-inline">
-            <h3 class="d-inline">
-                Give me Rating
-            </h3>
-        </div>
-
-        <input type="hidden" name="Product_ID" value="<?php echo $Product_ID; ?>">
-        <select name="stars" class="star" id="stars">
-            <option value="">--</option>
-            <option value="1" required selected>1</option>
-            <option value="2" required>2</option>
-            <option value="3" required>3</option>
-            <option value="4" required>4</option>
-            <option value="5" required>5</option>
-        </select>
-
-
-        <div id="review_user_name" class="form-floating mt-3">
-            <input required name="user_name" type="text" class="form-control review_input" id="floatingInput" placeholder="Full Name">
-            <label class="label-user" for="floatingInput">Full Name</label>
-        </div>
-        <div id="review_user_comment" class="form-floating mt-3">
-            <textarea required name="user_comment" class="form-control review_input" id="Comment" id="floatingInput" rows="15" placeholder="Comment"></textarea>
-            <label for="floatingInput">Comment</label>
-        </div>
-
-        <button type="submit" name="Submit" class="button-59       mt-3">Submit</button>
-
-    </form>
-
-
-
-
-    </div>
-
-
-
-    <div class="mt-5">
-
-
-
-        <?php
-
-        include('./footer.php')
-        ?>
-
-    </div>
 </body>
 
 </html>

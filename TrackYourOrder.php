@@ -157,6 +157,7 @@
 
 <body>
   <?php
+  include('./Functions/Common_Functions.php');
   include('Header.php');
 
   ?>

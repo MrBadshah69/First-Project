@@ -161,42 +161,7 @@ include('./Functions/Common_Functions.php');
   }
 
 
-  @media only screen and (max-width: 600px) {
-    #addtocart {
-      padding: 10px;
-      border: none;
-      background: lighten(#292d48, 65);
-      position: relative;
-      outline: none;
-      width: 100%;
-      border-radius: 5px;
-      color: #292d48;
-      font-size: 18px;
-    }
 
-    .cart-item {
-      position: absolute;
-      height: 24px;
-      width: 22px;
-      top: -10px;
-      right: -10px;
-
-      &:before {
-        content: '1';
-        display: block;
-        line-height: 24px;
-        height: 24px;
-        width: 24px;
-        font-size: 12px;
-        font-weight: 600;
-        background: #2bd156;
-        color: white;
-        border-radius: 20px;
-        text-align: center;
-      }
-    }
-
-  }
 
   /* Title Limit */
   .card-title {
@@ -226,6 +191,11 @@ include('./Functions/Common_Functions.php');
   .whatsapp-icon-link:hover {
     transform: scale(1.1);
   }
+
+  /*  Customer Review */
+  .card-css {
+    border-radius: .7rem;
+  }
 </style>
 
 
@@ -234,10 +204,10 @@ include('./Functions/Common_Functions.php');
 <body>
 
   <!-- WHATSAPP ICON -->
-<div class="whatsapp-icon-link-div">
-  <a style="z-index: 1;" data-aos="fade-left" data-aos-duration="1000" href="https://wa.me/message/QMU3ADQXKCE5M1" target="_blank" class="whatsapp-icon-link">
-    <img src="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=w240-h480-rw" alt="WhatsApp Icon">
-  </a>
+  <div class="whatsapp-icon-link-div">
+    <a style="z-index: 1;" data-aos="fade-left" data-aos-duration="1000" href="https://wa.me/message/QMU3ADQXKCE5M1" target="_blank" class="whatsapp-icon-link">
+      <img src="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=w240-h480-rw" alt="WhatsApp Icon">
+    </a>
   </div>
   <!-- WHATSAPP ICON END -->
 
@@ -288,8 +258,8 @@ include('./Functions/Common_Functions.php');
   <section>
     <div class="container">
       <div data-aos="fade-up" data-aos-delay="250">
-        <h2 id="heading1">Top Categories:</h2>
-        
+        <h2 id="heading1" class="fw-bold">Top Categories:</h2>
+
       </div>
       <div class="main-Categories p-2 mt-1">
         <div class="container">
@@ -323,9 +293,9 @@ include('./Functions/Common_Functions.php');
     </div>
   </section>
 
-  <section class="section-products">
+  <section id="section-products" class="section-products">
     <div class="container">
-      <h2 id="heading1" data-aos='fade-right' data-aos-delay='250'>Featured Products</h2>
+      <h2 class="fw-bold" id="heading1" data-aos='fade-right' data-aos-delay='250'>Featured Products</h2>
       <div class="row ">
         <!-- Single Product -->
         <?php
@@ -359,14 +329,15 @@ include('./Functions/Common_Functions.php');
                       </div>
                       <div class='card-body'>
                           <div class='page-wrapper'>
-                         <button id='addtocart'>
+                          <a href='?add_to_cart=$Product_ID'><button id='addtocart'><i class='fa-solid fa-cart-shopping'></i>
                                 Add to Cart
-                  <span class='cart-item'></span>
-                </button>
-              </div>
-              </div>
-                      </div>
-                          </div>";
+                </button></a>";
+              MainCart();
+              echo "
+                </div>
+                </div>
+                </div>
+                </div>";
             }
           }
         }
@@ -380,88 +351,118 @@ include('./Functions/Common_Functions.php');
 
 
   <section class="my-5">
-    <div class="container">
-      <!-- Carousel wrapper -->
-      <div id="carouselExampleControls" class="carousel slide text-center carousel-dark" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="rounded-circle shadow-1-strong mb-4" src="./images/admin-image.png" alt="avatar" style="width: 150px;" />
-            <div class="row d-flex justify-content-center">
-              <div class="col-lg-8">
-                <h5 class="mb-3">Muhammad Arsalan</h5>
-                <p>Web Developer</p>
-                <p class="text-muted">
-                  <i class="fas fa-quote-left pe-2"></i>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et deleniti
-                  nesciunt sint eligendi reprehenderit reiciendis, quibusdam illo, beatae quia
-                  fugit consequatur laudantium velit magnam error. Consectetur distinctio fugit
-                  doloremque.
-                </p>
+    <div class="container py-2">
+      <div class="col-md-10 col-xl-8">
+        <h3 class="fw-bold mb-4" data-aos='fade-right' data-aos-delay='250'>Customers Review</h3>
+        <p class="mb-4 pb-2 mb-md-5 pb-md-0" data-aos='fade-right' data-aos-delay='300'>
+          Discover what our valued customers have to say about their experiences. Dive into genuine feedback that reflects our commitment to quality and satisfaction.
+        </p>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="card card-css" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-body py-4 mt-2">
+              <div class="d-flex justify-content-center mb-4">
+                <img src="./images/blank-profile-picture-973460_1280.png" class="rounded-circle shadow-1-strong" width="100" height="100" />
               </div>
+              <h5 class="font-weight-bold">Teresa May</h5>
+              <h6 class="font-weight-bold my-3">Founder at ET Company</h6>
+              <ul class="list-unstyled d-flex justify-content-center">
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star-half-alt fa-sm text-warning"></i>
+                </li>
+              </ul>
+              <p class="mb-2">
+                <i class="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat
+                ad velit ab hic tenetur.
+              </p>
             </div>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="far fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-          <div class="carousel-item">
-            <img class="rounded-circle shadow-1-strong mb-4" src="./images/Review2.jpg" alt="avatar" style="width: 150px;" />
-            <div class="row d-flex justify-content-center">
-              <div class="col-lg-8">
-                <h5 class="mb-3">John Doe</h5>
-                <p>Web Developer</p>
-                <p class="text-muted">
-                  <i class="fas fa-quote-left pe-2"></i>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et deleniti
-                  nesciunt sint eligendi reprehenderit reiciendis.
-                </p>
-              </div>
-            </div>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="far fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-          <div class="carousel-item">
-            <img class="rounded-circle shadow-1-strong mb-4" src="./images/Review3.jpg" alt="avatar" style="width: 150px;" />
-            <div class="row d-flex justify-content-center">
-              <div class="col-lg-8">
-                <h5 class="mb-3">Anna Deynah</h5>
-                <p>UX Designer</p>
-                <p class="text-muted">
-                  <i class="fas fa-quote-left pe-2"></i>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et deleniti
-                  nesciunt sint eligendi reprehenderit reiciendis, quibusdam illo, beatae quia
-                  fugit consequatur laudantium velit magnam error. Consectetur distinctio fugit
-                  doloremque.
-                </p>
-              </div>
-            </div>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="far fa-star fa-sm"></i></li>
-            </ul>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="card card-css" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-body py-4 mt-2">
+              <div class="d-flex justify-content-center mb-4">
+                <img src="./images/blank-profile-picture-973460_1280.png" class="rounded-circle shadow-1-strong" width="100" height="100" />
+              </div>
+              <h5 class="font-weight-bold">Maggie McLoan</h5>
+              <h6 class="font-weight-bold my-3">Photographer at Studio LA</h6>
+              <ul class="list-unstyled d-flex justify-content-center">
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+              </ul>
+              <p class="mb-2">
+                <i class="fas fa-quote-left pe-2"></i>Autem, totam debitis suscipit saepe
+                sapiente magnam officiis quaerat necessitatibus odio assumenda perferendis
+                labore laboriosam.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-0">
+          <div class="card card-css" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-body py-4 mt-2">
+              <div class="d-flex justify-content-center mb-4">
+                <img src="./images/blank-profile-picture-973460_1280.png" class="rounded-circle shadow-1-strong" width="100" height="100" />
+              </div>
+              <h5 class="font-weight-bold">Alexa Horwitz</h5>
+              <h6 class="font-weight-bold my-3">Front-end Developer in NY</h6>
+              <ul class="list-unstyled d-flex justify-content-center">
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="fas fa-star fa-sm text-warning"></i>
+                </li>
+                <li>
+                  <i class="far fa-star fa-sm text-warning"></i>
+                </li>
+              </ul>
+              <p class="mb-2">
+                <i class="fas fa-quote-left pe-2"></i>Cras sit amet nibh libero, in gravida
+                nulla metus scelerisque ante sollicitudin commodo cras purus odio,
+                vestibulum in tempus viverra turpis.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
+
+
   </section>
 
 

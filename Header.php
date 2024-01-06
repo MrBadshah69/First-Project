@@ -3,54 +3,29 @@
 
   .page-wrapper {
     min-height: 100%;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
+  }
 
-    button {
-      padding: 10px;
-      border: none;
-      background: lighten(#292d48, 65);
-      position: relative;
-      outline: none;
-      width: 100%;
-      border-radius: 5px;
-      color: #292d48;
-      font-size: 18px;
+  #addtocart {
+    padding: 10px;
+    border: none;
+    background: lighten(#292d48, 65);
+    position: relative;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    color: #292d48;
+    font-size: 18px;
+  }
 
-      .cart-item {
-        position: absolute;
-        height: 24px;
-        width: 22px;
-        top: -10px;
-        right: -10px;
-
-        &:before {
-          content: '1';
-          display: block;
-          line-height: 24px;
-          height: 24px;
-          width: 24px;
-          font-size: 12px;
-          font-weight: 600;
-          background: #2bd156;
-          color: white;
-          border-radius: 20px;
-          text-align: center;
-        }
-      }
-
-      &.sendtocart {
-        .cart-item {
-          display: block;
-          animation: xAxis 1s forwards cubic-bezier(1.000, 0.440, 0.840, 0.165);
-
-          &:before {
-            animation: yAxis 1s alternate forwards cubic-bezier(0.165, 0.840, 0.440, 1.000);
-          }
-        }
-      }
-    }
+  .cart-item {
+    position: absolute;
+    height: 24px;
+    width: 22px;
+    top: -10px;
+    right: -10px;
   }
 
   .cart {
@@ -58,57 +33,7 @@
     margin-left: -19px;
     border-radius: 5px;
     z-index: -1;
-
-    &:before {
-      content: attr(data-totalitems);
-      font-size: 12px;
-      font-weight: 600;
-      position: absolute;
-      top: -5px;
-      right: -10px;
-      background: #2bd156;
-      line-height: 20px;
-      padding: 0 5px;
-      height: 20px;
-      min-width: 20px;
-      color: white;
-      text-align: center;
-      border-radius: 24px;
-    }
-
-    &.shake {
-      animation: shakeCart .4s ease-in-out forwards;
-    }
-  }
-
-  @keyframes xAxis {
-    100% {
-      transform: translateX(calc(50vw - 105px));
-    }
-  }
-
-  @keyframes yAxis {
-    100% {
-      transform: translateY(calc(-50vh + 75px));
-    }
-  }
-
-  @keyframes shakeCart {
-    25% {
-      transform: translateX(6px)
-    }
-
-    50% {
-      transform: translateX(-4px);
-    }
-
-    75% {
-      transform: translateX(2px);
-    }
-
-    100% {
-      transform: translateX(0);
-    }
+    display: flex;
   }
 
   .icon-account {
@@ -116,37 +41,30 @@
 
   }
 
-
+  .itemsCount {
+    position: absolute;
+    background-color: #00AF4F;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    top: -1px;
+    right: 0px;
+    left: 18px;
+    /* display: none; */
+    color: #fff;
+    padding: 1px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 10px;
+  }
 </style>
 
 <head>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </head>
-<script>
-  //  Add to cart
-  $(document).ready(function() {
-    $("#addtocart").on("click", function() {
-      var button = $(this);
-      var cart = $("#cart");
-      var cartTotal = cart.attr("data-totalitems");
-      var newCartTotal = parseInt(cartTotal) + 1;
-
-      button.addClass("sendtocart");
-      setTimeout(function() {
-        button.removeClass("sendtocart");
-        cart.addClass("shake").attr("data-totalitems", newCartTotal);
-        setTimeout(function() {
-          cart.removeClass("shake");
-        }, 500);
-      }, 1000);
-    });
-  });
-</script>
-
-
 <!-- Header -->
-  <header id="main-header">
+<header id="main-header">
   <!-- <section class="header"> -->
   <!-- Navbar -->
   <nav class=" navbar navbar-expand-lg bg-light ">
@@ -208,6 +126,9 @@
       </a>
       <div id="top-option">
         <div id="cart" class="cart" data-totalitems="0">
+          <div class="itemsCount"><?php
+                                  cart_number();
+                                  ?></div>
           <ion-icon style="z-index: -1;position: relative;" id="main-cart" name="bag-handle-outline"></ion-icon>
         </div>
       </div>
@@ -298,7 +219,7 @@
     </div>
 
   </nav>
-  </header>
+</header>
 
 
 

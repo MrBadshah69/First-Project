@@ -168,6 +168,7 @@ if (isset($_SESSION["User"])) {
 
     <!-- Header -->
     <?php
+    include('./Functions/Common_Functions.php');
     include('./Header.php');
     ?>
 

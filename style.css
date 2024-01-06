@@ -2,12 +2,17 @@
 
 body {
     margin: 0;
-    padding:0 ;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
@@ -179,7 +184,7 @@ h1, h2, h3, h4, h5, h6 {
 #main-cart,
 #main-login {
     height: 2.5rem;
-    width: 25px;
+    width: 26px;
     color: rgb(18, 18, 18);
 }
 
@@ -451,4 +456,11 @@ h1, h2, h3, h4, h5, h6 {
     height: 1px;
     background-color: #444444;
     transform: translateY(-50%);
+}
+
+/* cart button css */
+
+#addtocart:hover {
+    background-color: #00AF4F;
+    color: #000;
 }

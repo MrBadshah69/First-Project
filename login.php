@@ -160,6 +160,7 @@ if (isset($_SESSION["User"])) {
   <!-- Header -->
   <?php
   ob_start();
+  include('./Functions/Common_Functions.php');
   include('./Header.php');
   ?>
 

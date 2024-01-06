@@ -1,5 +1,5 @@
 <?php
-
+    include('./Functions/Common_Functions.php');
 include('./database.php');
 
 session_start();
@@ -113,6 +113,7 @@ if (!isset($_SESSION["User"])) {
 
 <body>
     <?php
+
     include('./Header.php');
 
     ?>
