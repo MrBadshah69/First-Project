@@ -129,7 +129,7 @@
           <div class="itemsCount"><?php
                                   cart_number();
                                   ?></div>
-          <ion-icon style="z-index: -1;position: relative;" id="main-cart" name="bag-handle-outline"></ion-icon>
+          <a href="Cart.php"><ion-icon style="z-index: -1;position: relative;" id="main-cart" name="bag-handle-outline"></ion-icon></a>
         </div>
       </div>
     </div>
