@@ -166,6 +166,36 @@ include("./Functions/Common_Functions.php");
             border: 1px solid #E4E4E4;
             border-radius: 5px;
         }
+
+        @media only screen and (max-width: 480px) {
+            .product-detail-side {
+                display: none;
+            }
+
+            .checkout-detail_side {
+                border: none;
+                width: 100%;
+            }
+
+            body {
+                background: linear-gradient(to right, #FFF 60%, #fff 50%);
+            }
+
+            .mobile-view-product-side {
+                background-color: #F5F5F5;
+                width: 100%;
+            }
+
+            .view-product-side {
+                display: block !important;
+
+            }
+
+            .main-bar {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     </style>
 </head>
 
@@ -192,6 +222,48 @@ include("./Functions/Common_Functions.php");
     </header>
 
 
+    <!-- Mobile view Product Side -->
+
+    <div class="mobile-view-product-side">
+        <div class="container view-product-side d-none py-4">
+            <div class="main-bar">
+                <a class="text-decoration-none" href="#viewproductside" class="btn btn-primary" data-bs-toggle="collapse">Show
+                    order summary <i class='fas fa-angle-down '></i></a>
+                <span>Rs.2,350</span>
+            </div>   
+            <div class="collapse" id="viewproductside">
+
+                <div class="conitainer m-4">
+                    <div class="product-content d-flex my-3">
+                        <img class="product-detail-image" src="Admin_area/Products_image/30303-920-008202-500.jpg"
+                            alt="Product Image">
+                        <div class="product-title">Logitech G502 X Gaming Mouse
+                        </div>
+                        <div class="product-price">
+                            <span>Rs.18,995</span>
+                        </div>
+                    </div>
+                    <div class="other-option">
+                        <div class="discount mb-4 d-flex justify-content-between">
+                            <input name="" type="text" class="form-control w-75" id="" placeholder="Discount code">
+                            <button class="ms-2 discount-code-submit p-2" type="submit">Apply</button>
+                        </div>
+                        <div class="subtotal me-1 ms-1 d-flex justify-content-between">
+                            Subtotal <span>Rs.2,000</span>
+                        </div>
+                        <div class="subtotal me-1 ms-1 d-flex justify-content-between">
+                            Shipping <span>Rs.350</span>
+                        </div>
+                        <div class="subtotal me-1 ms-1 d-flex justify-content-between">
+                            <b>TOTAL</b> <b>Rs.2,350</b>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-6 checkout-detail_side">
@@ -204,8 +276,7 @@ include("./Functions/Common_Functions.php");
                                 <h3 class="heading1">Contact</h3>
                                 <span>Have an account? <a class="text-dark" href="login.php">Log in</a></span>
                             </div>
-                            <input name="" type="email" class="form-control" 
-                                placeholder="Email or mobile phone number">
+                            <input name="" type="email" class="form-control" placeholder="Email or mobile phone number">
                         </div>
 
                         <!-- DEILVERY PART -->
@@ -221,7 +292,8 @@ include("./Functions/Common_Functions.php");
 
                         <!-- MAIN DETAIL SELECTION -->
                         <div class="Names mb-4 d-flex">
-                            <input name="" type="text" class="form-control" id="names" placeholder="First Name (option)">
+                            <input name="" type="text" class="form-control" id="names"
+                                placeholder="First Name (option)">
                             <input name="" type="text" class="form-control" placeholder="Last Name">
                         </div>
 
@@ -246,14 +318,16 @@ include("./Functions/Common_Functions.php");
                             <h3 class="heading3">Payment</h3>
                             <p>All transactions are secure and encrypted.</p>
                             <div id="payment-borders" class="form-control d-flex align-items-center">
-                                <input name="" class="form-check-input name=""" type="radio" name="flexRadioDisabled" id="flexRadio1">
+                                <input name="" class="form-check-input name=""" type="radio" name="flexRadioDisabled"
+                                    id="flexRadio1">
                                 <label id="payment-selector" class="form-check-label mt-1" for="flexRadio1">
                                     Cash on Delivery (COD) </label>
                             </div>
                         </div>
                         <div class="mb-4">
                             <div id="payment-borders" class="form-control d-flex align-items-center">
-                                <input name="" class="form-check-input name=""" type="radio" name="flexRadioDisabled" id="flexRadio">
+                                <input name="" class="form-check-input name=""" type="radio" name="flexRadioDisabled"
+                                    id="flexRadio">
                                 <label id="payment-selector" class="form-check-label mt-1" for="flexRadio">
                                     Bank Transfer (Advance Payment) </label>
                             </div>

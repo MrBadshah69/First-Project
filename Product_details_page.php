@@ -456,7 +456,7 @@ include('Header.php');
                             </p>
                             <br>
                             <h4>
-                                <?php echo $Product_Price; ?>
+                                <?php echo "Rs ". number_format($Product_Price, 2) . " PKR"; ?>
                             </h4>
                         </div>
 

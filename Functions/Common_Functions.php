@@ -38,7 +38,7 @@ function viewproduct()
                         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
                     <div class='card-body'>
                         <h6 class='card-title'>$Product_title</h6>
-                        <span>$Product_Price</span>
+                        <span>Rs " . number_format($Product_Price,) . " PKR</span>
                         </a>
                 </div>
                     </div>
@@ -80,7 +80,7 @@ function viewunqiuecatgories()
                         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
                     <div class='card-body'>
                         <h6 class='card-title'>$Product_title</h6>
-                        <span>$Product_Price</span>
+                        <span>Rs " . number_format($Product_Price,) . " PKR</span>
                         </a>
                 </div>
                     </div>
@@ -135,7 +135,7 @@ function viewunqiuebrands()
                         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
                     <div class='card-body'>
                         <h6 class='card-title'>$Product_title</h6>
-                        <span>$Product_Price</span>
+                        <span>Rs " . number_format($Product_Price,) . " PKR</span>
                         </a>
                 </div>
                     </div>
@@ -191,7 +191,7 @@ function searchproduct()
         <img src='Admin_area/Products_image/$Product_image1' class='card-img-top' alt='Product-img'>
         <div class='card-body'>
         <h6 class='card-title'>$Product_title</h6>
-        <span>$Product_Price</span>
+        <span>Rs " . number_format($Product_Price,) . " PKR</span>
         </a>
         </div>
         </div>
@@ -298,6 +298,5 @@ function cart_number()
     }
     echo $cart_number;
 }
-
 
 ?>

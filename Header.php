@@ -34,6 +34,8 @@
     border-radius: 5px;
     z-index: -1;
     display: flex;
+    cursor: pointer;
+
   }
 
   .icon-account {
